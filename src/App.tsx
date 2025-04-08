@@ -20,30 +20,6 @@ const App: React.FC = () => {
         return (
             <div className="center-screen">
                 <div className="spinner" />
-                <style>{`
-                    .center-screen {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 100vh;
-                        background-color: #f5f5f5;
-                    }
-
-                    .spinner {
-                        width: 48px;
-                        height: 48px;
-                        border: 4px solid #ccc;
-                        border-top-color: #333;
-                        border-radius: 50%;
-                        animation: spin 1s linear infinite;
-                    }
-
-                    @keyframes spin {
-                        to {
-                            transform: rotate(360deg);
-                        }
-                    }
-                `}</style>
             </div>
         );
     }

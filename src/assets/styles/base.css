@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: 600;
+}
+
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.button__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button__label {
+    white-space: nowrap;
+}
+
+.button--filled {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.button--filled:hover {
+    background-color: var(--primary20-color);
+}
+
+.button--filled:active {
+    background-color: var(--primary35-color);
+}
+
+.button--outline {
+    background-color: white;
+    color: var(--primary-color);
+    border: 2px solid #e5e5e5;
+}
+
+.button--outline:hover {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.button--outline:active {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    background-color: white;
+}
+
+/* --- Flat --- */
+.button--flat {
+    background-color: transparent;
+    color: var(--primary-color);
+}
+
+.button--flat:hover {
+    color: var(--secondary-color);
+}
+
+.button--flat:active {
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 0.5rem;
+}
+
+.button--outline .button__icon img {
+    filter: brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(110deg) brightness(95%) contrast(83%);
+}
+
+.button--outline:hover .button__icon img {
+    filter: brightness(0) saturate(100%) invert(31%) sepia(54%) saturate(6932%) hue-rotate(241deg) brightness(98%) contrast(101%);
+}
+
+.button--outline:active .button__icon img {
+    filter: brightness(0) saturate(100%) invert(31%) sepia(54%) saturate(6932%) hue-rotate(241deg) brightness(98%) contrast(101%);
+}
+
+.button--outline .button__icon img {
+    transition: filter 0.2s ease;
+}
+
+/* Input styles */
+.input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.5rem;
+    background-color: white;
+    color: var(--primary-color);
+    transition: all 0.2s ease;
+}
+
+.input:hover {
+    border-color: #d0d0d0;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 1px var(--secondary-color);
+}
+
+/* Select styles */
+.select {
+    position: relative;
+    width: 100%;
+}
+
+.select__input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    padding-right: 2.5rem; /* Space for the arrow */
+    font-size: 0.875rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 0.5rem;
+    background-color: white;
+    color: var(--primary-color);
+    appearance: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.select__input:hover {
+    border-color: #d0d0d0;
+}
+
+.select__input:focus {
+    outline: none;
+    border-color: var(--assistitive-color);
+    box-shadow: 0 0 0 1px var(--assistitive-color);
+}
+
+.select__arrow {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: transform 0.2s ease;
+}
+
+.select__input:focus + .select__arrow {
+    transform: translateY(-50%) rotate(180deg);
+}

@@ -1,0 +1,14 @@
+/* src/styles/main.css */
+@import './reset.css';
+@import './variables.css';
+@import './base.css';
+
+
+/* Компоненты */
+@import './components/layout.css';
+@import './components/company.css';
+@import './components/contact.css';
+@import './components/modals.css';
+@import './components/drawers.css';
+@import './components/login.css';
+@import './components/feature-page.css';

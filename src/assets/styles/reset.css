@@ -1,0 +1,63 @@
+/* reset.css */
+
+/* 1. Убираем отступы и padding */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Удаляем стандартные стили у html и body */
+html, body {
+    height: 100%;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* 3. Наследуем шрифт */
+body {
+    font-family: sans-serif;
+    background-color: #fff;
+    color: #000;
+}
+
+/* 4. Сброс списков */
+ul, ol {
+    list-style: none;
+}
+
+/* 5. Ссылки без подчёркивания */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 6. Изображения не выходят за границы */
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* 7. Форма: сброс стандартных стилей */
+input, button, textarea, select {
+    font: inherit;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+}
+
+/* 8. Убираем фокус для кнопок, если нужно */
+button {
+    cursor: pointer;
+}
+
+/* 9. Таблицы без отступов */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}

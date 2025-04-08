@@ -1,0 +1,17 @@
+:root {
+    /* Основные цвета */
+    --primary-color: #3B3B3B;
+    --primary20-color: #626262;
+    --primary35-color: #808080;
+    --secondary-color: #6D4AFF;
+    --assistitive-color: #35CDFD;
+    --background-color: #F7F7F7;
+
+    /* Размеры */
+    --sidebar-width: 3dvw;
+    --drawer-width: 20dvw;
+    --drawer-transition: 0.3s ease;
+    --drawer-transition-time: 300ms;
+    --drawer-min-width: 250px;
+    --drawer-max-width: 400px;
+}

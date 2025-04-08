@@ -1,13 +1,16 @@
 import React from 'react';
-import { IoBusinessOutline, IoPersonOutline, IoPeopleOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 
+// Импортируем иконки из вашей папки assets
+import companyIcon from '@/assets/images/Company.png';
+import contractorIcon from '@/assets/images/Contractor.png';
+import accountIcon from '@/assets/images/Account.png';
+
 interface NavigationDrawerProps {
-    isOpen: boolean;
     onClose: () => void;
 }
 
-const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ isOpen, onClose }) => {
+const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ onClose }) => {
     const navigate = useNavigate();
 
     const handleNavigation = (path: string) => {
@@ -16,68 +19,42 @@ const NavigationDrawer: React.FC<NavigationDrawerProps> = ({ isOpen, onClose }) 
     };
 
     return (
-        <div
-            className="navigation-drawer"
-            style={{
-                left: isOpen ? '80px' : '-250px'
-            }}
-        >
-            <div className="drawer-item drawer-header">
-                <IoBusinessOutline className="icon" />
-                <span>Organizations</span>
+        <>
+            <div className="navigation-drawer__header">
+                <h2 className="navigation-drawer__title">Oak Tree Cemetery</h2>
+                <div className="navigation-drawer__subtitle">Process Manager</div>
             </div>
 
-            <div className="drawer-item" onClick={() => handleNavigation('/contractors')}>
-                <IoPersonOutline className="icon" />
-                <span>Contractors</span>
+            <div
+                className="button button--filled drawer-button"
+                onClick={() => handleNavigation('/organizations')}
+            >
+                <div className="button__icon">
+                    <img src={companyIcon} alt="Organizations" />
+                </div>
+                <span className="button__label">Organizations</span>
             </div>
 
-            <div className="drawer-item" onClick={() => handleNavigation('/clients')}>
-                <IoPeopleOutline className="icon" />
-                <span>Clients</span>
+            <div
+                className="button button--outline drawer-button"
+                onClick={() => handleNavigation('/contractors')}
+            >
+                <div className="button__icon">
+                    <img src={contractorIcon} alt="Contractors" />
+                </div>
+                <span className="button__label">Contractors</span>
             </div>
 
-            <style>{`
-                .navigation-drawer {
-                    position: fixed;
-                    top: 0;
-                    width: 250px;
-                    height: 100vh;
-                    background-color: white;
-                    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-                    z-index: 10;
-                    transition: left 0.3s ease-in-out;
-                    overflow: hidden;
-                }
-
-                .drawer-item {
-                    display: flex;
-                    align-items: center;
-                    padding: 1rem 1.5rem;
-                    cursor: pointer;
-                    transition: background 0.2s;
-                }
-
-                .drawer-item:hover {
-                    background-color: #f3f4f6; /* gray.100 */
-                }
-
-                .drawer-header {
-                    background-color: #333;
-                    color: white;
-                    font-weight: bold;
-                }
-
-                .icon {
-                    margin-right: 0.75rem;
-                    font-size: 1.25rem;
-                }
-
-                span {
-                    font-size: 1rem;
-                }
-            `}</style>
-        </div>
+            <div
+                className="button button--outline drawer-button"
+                onClick={() => handleNavigation('/clients')}
+            >
+                <div className="button__icon">
+                    <img src={accountIcon} alt="Clients" />
+                </div>
+                <span className="button__label">Clients</span>
+            </div>
+        </>
     );
 };
 

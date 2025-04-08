@@ -15,14 +15,21 @@ const CompanyHeader: React.FC<CompanyHeaderProps> = ({ company }) => {
 
     return (
         <div className="company-header">
-            <div className="header-top">
+            <div className="company-header__top">
                 <h1>{company.name}</h1>
-                <div className="actions">
-                    <button className="icon-button" aria-label="Edit company">
-                        <IoPencil size={20} />
+                <div className="company-header__actions">
+                    <button
+                        className="icon-button"
+                        aria-label="Edit company"
+                    >
+                        <IoPencil size={22} />
                     </button>
-                    <button className="icon-button delete" aria-label="Delete company" onClick={handleOpen}>
-                        <IoTrash size={20} />
+                    <button
+                        className="icon-button"
+                        aria-label="Delete company"
+                        onClick={handleOpen}
+                    >
+                        <IoTrash size={22} color="#e53e3e" />
                     </button>
                 </div>
             </div>
@@ -33,41 +40,6 @@ const CompanyHeader: React.FC<CompanyHeaderProps> = ({ company }) => {
                 companyId={company.id}
                 companyName={company.name}
             />
-
-            <style>{`
-                .company-header {
-                    padding: 1rem;
-                    border-bottom: 1px solid #e2e8f0;
-                }
-
-                .header-top {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }
-
-                .actions {
-                    display: flex;
-                    gap: 0.5rem;
-                }
-
-                .icon-button {
-                    background: none;
-                    border: none;
-                    padding: 0.3rem;
-                    cursor: pointer;
-                    border-radius: 4px;
-                    transition: background 0.2s;
-                }
-
-                .icon-button:hover {
-                    background: #f1f1f1;
-                }
-
-                .icon-button.delete:hover {
-                    background: #ffe5e5;
-                }
-            `}</style>
         </div>
     );
 };

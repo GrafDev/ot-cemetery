@@ -50,7 +50,10 @@ export class AuthStore {
     // Метод для выхода из аккаунта
     logout(): void {
         this.token = null;
+        // Удаляем токен из localStorage
         localStorage.removeItem('auth_token');
+        // Очищаем токен в API
+        setAuthToken('');
     }
 
     // Геттер для проверки, авторизован ли пользователь

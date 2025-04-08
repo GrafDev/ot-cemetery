@@ -1,124 +1,66 @@
 import React from 'react';
-import { FaTree } from 'react-icons/fa';
-import { IoBriefcase, IoSearch, IoSettings, IoLogOut } from 'react-icons/io5';
+import {useNavigate} from 'react-router-dom';
+import {useAuthStore} from "@/stores/storeContext.tsx";
+import logoImage from '@/assets/images/Logo.png';
+import companyButton from '@/assets/images/Company.png';
+import searchButton from '@/assets/images/Search.png';
+import logoutButton from '@/assets/images/SignOut.png';
+import settingsButton from '@/assets/images/Settings.png';
 
 interface SidebarProps {
     activeDrawer: string | null;
     toggleDrawer: (drawerId: string) => void;
+    closeDrawer: () => void; // Добавляем функцию закрытия drawer
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ activeDrawer, toggleDrawer }) => {
+const Sidebar: React.FC<SidebarProps> = ({activeDrawer, toggleDrawer, closeDrawer}) => {
+    const navigate = useNavigate();
+    const authStore = useAuthStore();
+
+    const handleLogout = () => {
+        closeDrawer(); // Закрываем drawer перед выходом
+        authStore.logout();
+        navigate('/login');
+    };
+
     return (
         <div className="sidebar">
-            <div className="top">
-                <div className="logo">
-                    <FaTree size={40} color="white" />
-                    <div className="logo-text">
-                        <span>Oak Tree Cemetery</span>
-                        <span className="subtext">Process Manager</span>
-                    </div>
+            <div className="sidebar__top">
+                <div className="sidebar__logo">
+                    <img src={logoImage} alt="Project Knowledge Logo"/>
                 </div>
-
-                <button
-                    className={`icon-button ${activeDrawer === 'navigation' ? 'active' : ''}`}
+                <div
+                    className={`sidebar__icon-button ${activeDrawer === 'navigation' ? 'sidebar__icon-button--active' : ''}`}
                     onClick={() => toggleDrawer('navigation')}
+                    aria-label="Navigation menu"
                 >
-                    <IoBriefcase size={24} />
-                </button>
-
-                <button
-                    className={`icon-button ${activeDrawer === 'search' ? 'active' : ''}`}
+                    <img className="sidebar__icon-button__img" src={companyButton} alt="Company Button"/>
+                </div>
+                <div
+                    className={`sidebar__icon-button ${activeDrawer === 'search' ? 'sidebar__icon-button--active' : ''}`}
                     onClick={() => toggleDrawer('search')}
+                    aria-label="Search"
                 >
-                    <IoSearch size={24} />
-                </button>
+                    <img className="sidebar__icon-button__img" src={searchButton} alt="Search Button"/>
+                </div>
             </div>
 
-            <div className="bottom">
-                <button
-                    className={`icon-button ${activeDrawer === 'settings' ? 'active' : ''}`}
+            <div className="sidebar__bottom">
+                <div
+                    className={`sidebar__icon-button ${activeDrawer === 'settings' ? 'sidebar__icon-button--active' : ''}`}
                     onClick={() => toggleDrawer('settings')}
+                    aria-label="Settings"
                 >
-                    <IoSettings size={24} />
-                </button>
-
-                <button className="icon-button">
-                    <IoLogOut size={24} />
-                </button>
+                    <img className="sidebar__icon-button__img" src={settingsButton} alt="Settings Button"/>
+                </div>
+                <div
+                    className="sidebar__icon-button"
+                    onClick={handleLogout}
+                    aria-label="Logout"
+                >
+                    <img className="sidebar__icon-button__img" src={logoutButton} alt="Logout Button"/>
+                </div>
             </div>
-
-            <div className="copyright">
-                <small>All Funeral Services © 2015-2025</small>
-            </div>
-
-            <style>{`
-                .sidebar {
-                    width: 80px;
-                    background-color: #333;
-                    color: white;
-                    height: 100vh;
-                    position: fixed;
-                    left: 0;
-                    top: 0;
-                    z-index: 10;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: space-between;
-                    padding: 1.5rem 0;
-                }
-
-                .top, .bottom {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 1.5rem;
-                }
-
-                .logo {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    text-align: center;
-                    margin-bottom: 1rem;
-                }
-
-                .logo-text {
-                    margin-top: 0.5rem;
-                    font-size: 10px;
-                    color: white;
-                }
-
-                .logo-text .subtext {
-                    color: #ccc;
-                    font-size: 10px;
-                }
-
-                .icon-button {
-                    background: transparent;
-                    border: none;
-                    padding: 0.5rem;
-                    width: 100%;
-                    color: white;
-                    transition: background 0.2s;
-                    cursor: pointer;
-                }
-
-                .icon-button:hover {
-                    background-color: #444;
-                }
-
-                .icon-button.active {
-                    background-color: #444;
-                }
-
-                .copyright {
-                    font-size: 10px;
-                    color: #aaa;
-                    text-align: center;
-                    padding: 0.5rem;
-                }
-            `}</style>
         </div>
     );
 };

@@ -1,4 +1,4 @@
-// src/routes/AppRoutes.tsx.tsx
+// src/routes/AppRoutes.tsx
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
@@ -6,7 +6,8 @@ import { useAuthStore } from '../stores/storeContext';
 import ProtectedRoute from '../components/routing/ProtectedRoute';
 import LoginPage from "@/pages/LoginPage.tsx";
 import CompanyPage from "@/pages/CompanyPage.tsx";
-
+import ContractorsPage from "@/pages/ContractorsPage.tsx";
+import ClientsPage from "@/pages/ClientsPage.tsx";
 
 const AppRoutes: React.FC = () => {
     const authStore = useAuthStore();
@@ -26,6 +27,22 @@ const AppRoutes: React.FC = () => {
                 element={
                     <ProtectedRoute>
                         <CompanyPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/contractors"
+                element={
+                    <ProtectedRoute>
+                        <ContractorsPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/clients"
+                element={
+                    <ProtectedRoute>
+                        <ClientsPage />
                     </ProtectedRoute>
                 }
             />

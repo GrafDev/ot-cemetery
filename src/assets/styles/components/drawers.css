@@ -1,0 +1,188 @@
+.drawer-container {
+    position: relative;
+    width: var(--drawer-width);
+    min-width: var(--drawer-min-width);
+    max-width: var(--drawer-max-width);
+    height: 100%;
+    overflow: hidden;
+    transition: width 0.3s ease, min-width 0.3s ease;
+    transition-delay: 0.2s; /* Задержка перед уменьшением */
+}
+
+/* Добавляем новый класс для закрытого состояния контейнера */
+.drawer-container--closed {
+    width: 0;
+    min-width: 0;
+    transition-delay: 0.2s; /* Задержка перед уменьшением */
+}
+
+/* Для активного drawer отменяем задержку и сразу возвращаем ширину */
+.drawer-container--active {
+    width: var(--drawer-width);
+    min-width: var(--drawer-min-width);
+    max-width: var(--drawer-max-width);
+    transition-delay: 0s; /* Отменяем задержку при открытии */
+}
+
+.drawer-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    z-index: 5;
+    opacity: 1;
+    box-shadow: 0 0 10px #1a1a1a;
+    transition: opacity var(--drawer-transition-time) ease;
+}
+
+.drawer-backdrop--hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (min-width: 768px) {
+    .drawer-backdrop {
+        display: none;
+    }
+}
+
+/* Общие стили для всех drawer */
+.navigation-drawer,
+.search-drawer,
+.settings-drawer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--drawer-width);
+    max-width: var(--drawer-max-width);
+    min-width: var(--drawer-min-width);
+    height: 100%;
+    background-color: white;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform var(--drawer-transition-time) ease, opacity var(--drawer-transition-time) ease;
+    overflow-y: auto;
+    z-index: 1;
+    margin: 0;
+    padding: 5%;
+}
+
+/* Активный drawer */
+.navigation-drawer--active,
+.search-drawer--active,
+.settings-drawer--active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Заголовок drawer */
+.navigation-drawer__header {
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 1.5rem;
+}
+
+.navigation-drawer__title {
+    font-size: 1.4em;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.navigation-drawer__subtitle {
+    font-size: 1em;
+    color: var(--primary35-color);
+    margin-bottom: 1rem;
+}
+
+/* Вспомогательные классы для кнопок в drawer */
+.drawer-button {
+    margin: 0.5rem 0;
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+/* Специфичные стили для иконок в drawer */
+.drawer-button .button__icon img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* Активная кнопка может потребовать инвертирования цвета иконки */
+.button--filled .button__icon img {
+    filter: brightness(0) saturate(100%) invert(1);
+}
+
+/* Стили для поискового drawer */
+.search-form {
+    margin-bottom: 1rem;
+}
+
+.search-form__input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.search-form__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.75rem;
+}
+
+.search-form__icon img {
+    width: 16px;
+    height: 16px;
+}
+
+.search-form__input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    border: none;
+    outline: none;
+}
+
+/* Стили для настроек drawer */
+.settings-section {
+    margin-bottom: 1.5rem;
+}
+
+.settings-section__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.settings-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.settings-item__label {
+    font-weight: 500;
+    color: var(--primary35-color);
+}
+
+.settings-item__select {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 0.9rem;
+}

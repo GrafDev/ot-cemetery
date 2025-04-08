@@ -34,20 +34,6 @@ const CompanyPage: React.FC = () => {
         return (
             <div className="center-wrapper">
                 <div className="spinner" />
-                <style>{`
-                    .spinner {
-                        width: 48px;
-                        height: 48px;
-                        border: 4px solid #ccc;
-                        border-top-color: #333;
-                        border-radius: 50%;
-                        animation: spin 1s linear infinite;
-                    }
-
-                    @keyframes spin {
-                        to { transform: rotate(360deg); }
-                    }
-                `}</style>
             </div>
         );
     }
@@ -74,42 +60,11 @@ const CompanyPage: React.FC = () => {
         <div className="company-page">
             <CompanyHeader company={companyStore.company} />
 
-            <div className="content-stack">
+            <div className="company-page__content-stack">
                 <CompanyDetails company={companyStore.company} />
                 <ContactInfo contact={contactStore.contact} />
                 <PhotosGallery company={companyStore.company} />
             </div>
-
-            <style>{`
-                .company-page {
-                    background-color: white;
-                    border-radius: 8px;
-                    overflow: hidden;
-                    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-                }
-
-                .content-stack {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1rem;
-                    padding: 1rem;
-                }
-
-                .center-wrapper {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 80vh;
-                    text-align: center;
-                }
-
-                .error-box {
-                    padding: 1rem;
-                    background-color: #fed7d7;
-                    color: #9b2c2c;
-                    border-radius: 6px;
-                }
-            `}</style>
         </div>
     );
 };
