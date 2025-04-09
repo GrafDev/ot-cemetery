@@ -30,17 +30,27 @@ const CompanyDeleteModal: React.FC<CompanyDeleteModalProps> = ({
         }
     };
 
+    const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        // Если клик был прямо на backdrop (а не на его дочерних элементах), закрываем модалку
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    };
+
     if (!isOpen) return null;
 
     return (
-        <div className="modal-backdrop">
+        <div className="modal-backdrop" onClick={handleBackdropClick}>
             <div className="modal">
-                <button className="modal__close" onClick={onClose}>&times;</button>
-                <h2>Удаление компании</h2>
-                <p>Вы уверены, что хотите удалить компанию "{companyName}"? Это действие нельзя будет отменить.</p>
+                <h2 className="modal__title">Remove the Organization?</h2>
+                <p className="modal__text">Are you sure you want to remove this Organization?</p>
                 <div className="modal__actions">
-                    <button className="btn btn--outline" onClick={onClose}>Отмена</button>
-                    <button className="btn btn--danger" onClick={handleDelete}>Удалить</button>
+                    <button className="button button--outline" onClick={onClose}>
+                        <span className="button__label">No</span>
+                    </button>
+                    <button className="button button--filled" onClick={handleDelete}>
+                        <span className="button__label">Yes, remove</span>
+                    </button>
                 </div>
             </div>
         </div>

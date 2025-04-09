@@ -16,7 +16,7 @@ const LoginPage: React.FC = () => {
     const onSubmit = async (data: LoginFormData) => {
         try {
             await authStore.login(data.username);
-            navigate('/company/12');
+            navigate('/organizations'); // Меняем на redirect на список компаний
         } catch {
             console.error('Authentication error:', authStore.error || 'Failed to login');
         }

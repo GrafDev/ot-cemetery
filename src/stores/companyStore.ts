@@ -9,6 +9,11 @@ export class CompanyStore {
     isLoading: boolean = false;
     error: string | null = null;
 
+    // Добавленные свойства для работы со списком компаний
+    companies: ICompany[] = [];
+    isLoadingList: boolean = false;
+    listError: string | null = null;
+
     constructor(rootStore: RootStore) {
         this.rootStore = rootStore;
         makeAutoObservable(this, { rootStore: false });
@@ -65,6 +70,11 @@ export class CompanyStore {
             runInAction(() => {
                 this.company = null;
                 this.isLoading = false;
+
+                // Если компания есть в списке, удаляем её оттуда
+                if (this.companies.length > 0) {
+                    this.companies = this.companies.filter(company => company.id !== id);
+                }
             });
         } catch (error) {
             runInAction(() => {
@@ -116,6 +126,33 @@ export class CompanyStore {
                 this.isLoading = false;
             });
         }
+    }
+
+    // Получение списка компаний
+    async fetchCompanies(): Promise<void> {
+        this.isLoadingList = true;
+        this.listError = null;
+
+        try {
+            const companiesData = await companyApi.getCompanies();
+
+            runInAction(() => {
+                this.companies = companiesData;
+                this.isLoadingList = false;
+            });
+        } catch (error) {
+            runInAction(() => {
+                this.listError = error instanceof Error ? error.message : 'Произошла ошибка при загрузке списка компаний';
+                this.isLoadingList = false;
+            });
+        }
+    }
+
+    // Сброс состояния списка компаний
+    resetList(): void {
+        this.companies = [];
+        this.isLoadingList = false;
+        this.listError = null;
     }
 
     // Сброс состояния

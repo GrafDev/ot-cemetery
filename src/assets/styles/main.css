@@ -7,8 +7,9 @@
 /* Компоненты */
 @import './components/layout.css';
 @import './components/company.css';
-@import './components/contact.css';
 @import './components/modals.css';
 @import './components/drawers.css';
 @import './components/login.css';
 @import './components/feature-page.css';
+@import './components/company-list.css';
+@import './components/company-details.css';

@@ -1,5 +1,6 @@
 import React from 'react';
-import { IContact } from '../../api/contactApi';
+import { IContact } from '@/api/contactApi';
+import EditButton from '@/components/ui/EditButton';
 
 interface ContactInfoProps {
     contact: IContact | null;
@@ -25,11 +26,16 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ contact }) => {
         return phone;
     };
 
+    const handleEdit = () => {
+        // Здесь будет логика открытия модального окна для редактирования
+        console.log('Edit contact info');
+    };
+
     return (
         <div className="contact-info">
             <div className="contact-info__header">
                 <h2>Contacts</h2>
-                <button className="edit-button">Edit</button>
+                <EditButton onClick={handleEdit} />
             </div>
 
             <div className="contact-info__grid">

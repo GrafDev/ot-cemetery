@@ -57,13 +57,14 @@ const CompanyPage: React.FC = () => {
     }
 
     return (
-        <div className="company-page">
+        <div className="company-page-container">
             <CompanyHeader company={companyStore.company} />
-
-            <div className="company-page__content-stack">
-                <CompanyDetails company={companyStore.company} />
-                <ContactInfo contact={contactStore.contact} />
-                <PhotosGallery company={companyStore.company} />
+            <div className="company-page">
+                <div className="company-page__content-stack">
+                    <CompanyDetails company={companyStore.company} />
+                    <ContactInfo contact={contactStore.contact} />
+                    <PhotosGallery company={companyStore.company} />
+                </div>
             </div>
         </div>
     );

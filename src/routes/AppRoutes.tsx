@@ -6,6 +6,7 @@ import { useAuthStore } from '../stores/storeContext';
 import ProtectedRoute from '../components/routing/ProtectedRoute';
 import LoginPage from "@/pages/LoginPage.tsx";
 import CompanyPage from "@/pages/CompanyPage.tsx";
+import CompaniesList from "@/pages/CompaniesList.tsx"; // Импортируем новый компонент
 import ContractorsPage from "@/pages/ContractorsPage.tsx";
 import ClientsPage from "@/pages/ClientsPage.tsx";
 
@@ -18,8 +19,16 @@ const AppRoutes: React.FC = () => {
                 path="/login"
                 element={
                     authStore.isAuthenticated
-                        ? <Navigate to="/company/12" replace />
+                        ? <Navigate to="/organizations" replace />
                         : <LoginPage />
+                }
+            />
+            <Route
+                path="/organizations"
+                element={
+                    <ProtectedRoute>
+                        <CompaniesList />
+                    </ProtectedRoute>
                 }
             />
             <Route
@@ -46,7 +55,7 @@ const AppRoutes: React.FC = () => {
                     </ProtectedRoute>
                 }
             />
-            <Route path="/" element={<Navigate to="/company/12" replace />} />
+            <Route path="/" element={<Navigate to="/organizations" replace />} />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     );

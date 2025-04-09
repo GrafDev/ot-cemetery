@@ -11,32 +11,35 @@
 
 .modal {
     background: white;
-    padding: 2rem;
-    border-radius: 8px;
+    padding: 1.5rem;
+    border-radius: 1rem;
     position: relative;
     width: 100%;
     max-width: 500px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    text-align: center;
 }
 
-.modal__close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
+.modal__title {
     font-size: 1.5rem;
-    cursor: pointer;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.modal__text {
+    font-size: 1.1rem;
+    color: var(--primary35-color);
+    margin-bottom: 2rem;
 }
 
 .modal__actions {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 1rem;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
 }
 
-.btn--danger {
-    background: #e53e3e;
-    color: white;
+.modal__actions .button {
+    min-width: 180px;
+    padding: 0.75rem 1.5rem;
 }
