@@ -1,5 +1,5 @@
 // EditCompanyDetails.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Добавляем useEffect
 import { ICompany, ICompanyUpdateData } from '@/api/companyApi';
 import checkIcon from '@/assets/images/Check.png';
 import cancelIcon from '@/assets/images/X.png';
@@ -30,12 +30,21 @@ const EditCompanyDetails: React.FC<EditCompanyDetailsProps> = ({ company, onSave
     const [businessEntity, setBusinessEntity] = useState<string>(company.businessEntity);
     const [companyTypes, setCompanyTypes] = useState<string[]>(company.type);
 
+    // Добавляем эффект для обновления данных формы при изменении свойства company
+    useEffect(() => {
+        setContractNo(company.contract.no);
+        setContractDate(formatDateForInput(company.contract.issue_date));
+        setBusinessEntity(company.businessEntity);
+        setCompanyTypes([...company.type]);
+    }, [company]);
+
     // Состояния для выпадающих списков
     const [isBusinessEntityOpen, setIsBusinessEntityOpen] = useState<boolean>(false);
     const [isCompanyTypeOpen, setIsCompanyTypeOpen] = useState<boolean>(false);
 
     // Состояние загрузки
     const [isLoading, setIsLoading] = useState<boolean>(false);
+
 
     // Обработчик для клика вне селекторов
     React.useEffect(() => {

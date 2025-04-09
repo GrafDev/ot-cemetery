@@ -4,25 +4,32 @@ import { useNavigate } from 'react-router-dom';
 import { useCompanyStore } from '../stores/storeContext';
 import companyIcon from '@/assets/images/Company.png';
 import chevronIcon from '@/assets/images/Chevron.png';
-import {formatCompanyTypes} from "@/utils/companyUtils.ts"; // Предполагаем, что у вас есть такая иконка
+import { formatCompanyTypes } from "@/utils/companyUtils.ts";
 
 const CompaniesList: React.FC = () => {
     const companyStore = useCompanyStore();
     const navigate = useNavigate();
 
-
     useEffect(() => {
-        // Загружаем список компаний при монтировании компонента
-        const fetchData = async () => {
-            await companyStore.fetchCompanies();
-        };
+        // Загружаем список компаний только если он еще не загружен
+        if (companyStore.companies.length === 0) {
+            const fetchData = async () => {
+                await companyStore.fetchCompanies();
+            };
+            fetchData();
+        } else {
+            // Если у нас уже есть текущая компания в store,
+            // и она есть в списке, обновляем её данные в списке
+            if (companyStore.company) {
+                const companyIndex = companyStore.companies.findIndex(
+                    c => c.id === companyStore.company?.id
+                );
 
-        fetchData();
-
-        // Очищаем состояние при размонтировании
-        return () => {
-            companyStore.resetList();
-        };
+                if (companyIndex !== -1) {
+                    companyStore.updateCompanyInList(companyStore.company);
+                }
+            }
+        }
     }, [companyStore]);
 
     // Обработчик для перехода к детальной странице компании

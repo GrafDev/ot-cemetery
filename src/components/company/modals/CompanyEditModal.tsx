@@ -33,6 +33,8 @@ const CompanyEditModal: React.FC<CompanyEditModalProps> = ({
         }
     };
 
+
+
     if (!isOpen) return null;
 
     return (

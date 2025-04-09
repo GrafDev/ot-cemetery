@@ -13,4 +13,4 @@
 @import './components/feature-page.css';
 @import './components/company-list.css';
 @import './components/company-details.css';
-@import './components/edit-company-details.css';
+@import 'components/edit-components.css';
