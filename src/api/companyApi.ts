@@ -1,3 +1,5 @@
+import {API_URL} from "@/api/config.ts";
+import toast from "react-hot-toast";
 
 export interface ICompanyPhoto {
     name: string;
@@ -87,36 +89,62 @@ export const companyApi = {
     },
 
     // Загрузка изображения
-    uploadImage: async (id: string, file: File): Promise<ICompanyPhoto> => {
+    uploadImage: async (id: string, file: File): Promise<ICompanyPhoto | null> => {
         const formData = new FormData();
         formData.append('file', file);
 
-        const response = await fetch(`https://test-task-api.allfuneral.com/companies/${id}/image`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
-            },
-            body: formData
-        });
+        try {
+            const response = await fetch(`${API_URL}/companies/${id}/image`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+                },
+                body: formData,
+            });
 
-        if (!response.ok) {
-            throw new Error(`Ошибка при загрузке изображения: ${response.statusText}`);
+            if (!response.ok) {
+                if (response.status === 413) {
+                    toast.error('Файл слишком большой. Максимум 5MB.');
+                    return null;
+                }
+                toast.error(`Ошибка загрузки: ${response.status} ${response.statusText}`);
+                return null;
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Ошибка загрузки изображения:', error);
+            toast.error('Не удалось загрузить изображение. Попробуйте ещё раз.');
+            return null;
         }
-
-        return await response.json();
     },
+
+
 
     // Удаление изображения
     deleteImage: async (companyId: string, imageName: string): Promise<void> => {
-        const response = await fetch(`https://test-task-api.allfuneral.com/companies/${companyId}/image/${imageName}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
-            }
-        });
+        try {
+            const response = await fetch(`${API_URL}/companies/${companyId}/image/${imageName}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+                },
+                // Добавляем настройки CORS
+                mode: 'cors',
+                credentials: 'same-origin'
+            });
 
-        if (!response.ok) {
-            throw new Error(`Ошибка при удалении изображения: ${response.statusText}`);
+            if (!response.ok) {
+                throw new Error(`Ошибка при удалении изображения: ${response.status} ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error('Ошибка удаления изображения:', error);
+            // Переформатируем ошибку для лучшего отображения пользователю
+            if (error instanceof Error) {
+                throw error;
+            } else {
+                throw new Error('Неизвестная ошибка при удалении изображения');
+            }
         }
     },
 

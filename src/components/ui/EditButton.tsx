@@ -7,18 +7,24 @@ interface EditButtonProps {
     onClick: () => void;
     text?: string;
     iconType?: 'edit' | 'addPhoto';
+    disabled?: boolean;
 }
 
 const EditButton: React.FC<EditButtonProps> = ({
                                                    onClick,
                                                    text = 'Edit',
-                                                   iconType = 'edit'
+                                                   iconType = 'edit',
+                                                   disabled = false
                                                }) => {
     // Выбираем иконку в зависимости от параметра iconType
     const icon = iconType === 'addPhoto' ? addPhotoIcon : editIcon;
 
     return (
-        <button className="button button--outline button--small" onClick={onClick}>
+        <button
+            className="button button--outline button--small"
+            onClick={onClick}
+            disabled={disabled}
+        >
             <div className="button__icon">
                 <img src={icon} alt={text} />
             </div>

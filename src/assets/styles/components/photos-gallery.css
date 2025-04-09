@@ -1,0 +1,46 @@
+/* Стили для компонента PhotosGallery */
+
+.photos-gallery__item--loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    border: 1px dashed var(--primary50-color);
+    background-color: var(--primary95-color);
+    border-radius: 8px;
+    gap: 10px;
+}
+
+.photos-gallery__item--loading .spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--secondary-color);
+    animation: spin 1s linear infinite;
+}
+
+.photos-gallery__empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+    color: var(--primary35-color);
+    background-color: var(--primary95-color);
+    border-radius: 8px;
+    border: 1px dashed var(--primary50-color);
+}
+
+/* Блокировка кнопки во время загрузки */
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Анимация для спиннера */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

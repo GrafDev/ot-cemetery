@@ -35,22 +35,55 @@ export class ContactStore {
 
     // Обновление данных контакта
     async updateContact(id: string, data: IContactUpdateData): Promise<void> {
+        if (!this.contact) {
+            this.error = 'Нет данных контакта для обновления';
+            return;
+        }
+
+        // Сначала обновляем данные локально
+        this.updateContactLocally(data);
+
         this.isLoading = true;
         this.error = null;
 
         try {
-            const updatedContact = await contactApi.updateContact(id, data);
+            // Отправляем данные на сервер
+            await contactApi.updateContact(id, data);
 
             runInAction(() => {
-                this.contact = updatedContact;
                 this.isLoading = false;
             });
         } catch (error) {
             runInAction(() => {
                 this.error = error instanceof Error ? error.message : 'Произошла ошибка при обновлении данных контакта';
                 this.isLoading = false;
+                throw error;
             });
         }
+    }
+
+    // Метод для локального обновления данных контакта
+    updateContactLocally(data: IContactUpdateData): void {
+        if (!this.contact) return;
+
+        runInAction(() => {
+            // Обновляем только те поля, которые пришли в data
+            if (data.firstname !== undefined) {
+                this.contact!.firstname = data.firstname;
+            }
+
+            if (data.lastname !== undefined) {
+                this.contact!.lastname = data.lastname;
+            }
+
+            if (data.phone !== undefined) {
+                this.contact!.phone = data.phone;
+            }
+
+            if (data.email !== undefined) {
+                this.contact!.email = data.email;
+            }
+        });
     }
 
     // Сброс состояния

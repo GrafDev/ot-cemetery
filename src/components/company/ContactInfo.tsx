@@ -1,12 +1,19 @@
-import React from 'react';
-import { IContact } from '@/api/contactApi';
+import React, { useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import {IContact, IContactUpdateData} from '@/api/contactApi';
 import EditButton from '@/components/ui/EditButton';
+import { useContactStore } from '@/stores/storeContext';
+import toast from 'react-hot-toast';
+import EditContactInfo from './EditContactInfo';
 
 interface ContactInfoProps {
     contact: IContact | null;
 }
 
 const ContactInfo: React.FC<ContactInfoProps> = ({ contact }) => {
+    const contactStore = useContactStore();
+    const [isEditing, setIsEditing] = useState<boolean>(false);
+
     if (!contact) {
         return (
             <div className="contact-info">
@@ -27,29 +34,55 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ contact }) => {
     };
 
     const handleEdit = () => {
-        // Здесь будет логика открытия модального окна для редактирования
-        console.log('Edit contact info');
+        setIsEditing(true);
     };
 
+    const handleCancel = () => {
+        setIsEditing(false);
+    };
+
+    const handleSave = async (updateData: IContactUpdateData) => {
+        try {
+            await contactStore.updateContact(contact.id, updateData);
+            setIsEditing(false);
+            toast.success('Contact information updated successfully');
+        } catch {
+            toast.error(contactStore.error || 'Failed to update contact information');
+            throw new Error('Failed to update contact information');
+        }
+    };
+
+    // Рендер в режиме просмотра
+    if (!isEditing) {
+        return (
+            <div className="contact-info">
+                <div className="contact-info__header">
+                    <h2>Contacts</h2>
+                    <EditButton onClick={handleEdit} />
+                </div>
+
+                <div className="contact-info__grid">
+                    <div className="contact-info__label">Responsible person:</div>
+                    <div>{contact.firstname} {contact.lastname}</div>
+
+                    <div className="contact-info__label">Phone number:</div>
+                    <div>{formatPhone(contact.phone)}</div>
+
+                    <div className="contact-info__label">E-mail:</div>
+                    <div>{contact.email}</div>
+                </div>
+            </div>
+        );
+    }
+
+    // Рендер в режиме редактирования через новый компонент
     return (
-        <div className="contact-info">
-            <div className="contact-info__header">
-                <h2>Contacts</h2>
-                <EditButton onClick={handleEdit} />
-            </div>
-
-            <div className="contact-info__grid">
-                <div className="contact-info__label">Responsible person:</div>
-                <div>{contact.firstname} {contact.lastname}</div>
-
-                <div className="contact-info__label">Phone number:</div>
-                <div>{formatPhone(contact.phone)}</div>
-
-                <div className="contact-info__label">E-mail:</div>
-                <div>{contact.email}</div>
-            </div>
-        </div>
+        <EditContactInfo
+            contact={contact}
+            onSave={handleSave}
+            onCancel={handleCancel}
+        />
     );
 };
 
-export default ContactInfo;
+export default observer(ContactInfo);

@@ -147,12 +147,20 @@ export class CompanyStore {
     }
 
     // Загрузка изображения
-    async uploadImage(id: string, file: File): Promise<void> {
+    async uploadImage(id: string, file: File): Promise<boolean> {
         this.isLoading = true;
         this.error = null;
 
         try {
             const photo = await companyApi.uploadImage(id, file);
+
+            if (!photo) {
+                // Ошибка уже показана через toast в companyApi
+                runInAction(() => {
+                    this.isLoading = false;
+                });
+                return false;
+            }
 
             runInAction(() => {
                 if (this.company) {
@@ -160,11 +168,14 @@ export class CompanyStore {
                 }
                 this.isLoading = false;
             });
+
+            return true;
         } catch (error) {
             runInAction(() => {
                 this.error = error instanceof Error ? error.message : 'Произошла ошибка при загрузке изображения';
                 this.isLoading = false;
             });
+            return false;
         }
     }
 

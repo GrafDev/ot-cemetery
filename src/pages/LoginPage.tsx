@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-import { useAuthStore } from '../stores/storeContext';
+import {useAuthStore, useCompanyStore} from '../stores/storeContext';
 import { useForm } from 'react-hook-form';
 
 interface LoginFormData {
@@ -10,12 +10,14 @@ interface LoginFormData {
 
 const LoginPage: React.FC = () => {
     const authStore = useAuthStore();
+    const companyStore = useCompanyStore();
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm<LoginFormData>();
 
     const onSubmit = async (data: LoginFormData) => {
         try {
             await authStore.login(data.username);
+            companyStore.resetList()
             navigate('/organizations'); // Меняем на redirect на список компаний
         } catch {
             console.error('Authentication error:', authStore.error || 'Failed to login');
