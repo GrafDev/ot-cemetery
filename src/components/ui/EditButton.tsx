@@ -1,4 +1,3 @@
-// src/components/ui/EditButton.tsx
 import React from 'react';
 import editIcon from '@/assets/images/iam2.png';
 import addPhotoIcon from '@/assets/images/Add Photo.png';
@@ -16,7 +15,6 @@ const EditButton: React.FC<EditButtonProps> = ({
                                                    iconType = 'edit',
                                                    disabled = false
                                                }) => {
-    // Выбираем иконку в зависимости от параметра iconType
     const icon = iconType === 'addPhoto' ? addPhotoIcon : editIcon;
 
     return (

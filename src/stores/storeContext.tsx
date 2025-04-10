@@ -1,11 +1,8 @@
-// src/stores/storeContext.tsx
 import React, { createContext, useContext } from 'react';
 import { rootStore, RootStore } from './rootStore';
 
-// Создаем контекст React для стора
 const StoreContext = createContext<RootStore | null>(null);
 
-// Компонент Provider для предоставления сторов компонентам
 export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
         <StoreContext.Provider value={rootStore}>
@@ -14,7 +11,6 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     );
 };
 
-// Хук для использования сторов в компонентах
 export const useStores = (): RootStore => {
     const context = useContext(StoreContext);
     if (context === null) {
@@ -23,7 +19,6 @@ export const useStores = (): RootStore => {
     return context;
 };
 
-// Хуки для конкретных сторов
 export const useAuthStore = () => {
     const { authStore } = useStores();
     return authStore;

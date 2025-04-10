@@ -15,7 +15,6 @@ const PhotosGallery: React.FC<PhotosGalleryProps> = ({company}) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleAddPhoto = () => {
-        // Активируем скрытый input для выбора файла
         fileInputRef.current?.click();
     };
 
@@ -33,7 +32,6 @@ const PhotosGallery: React.FC<PhotosGalleryProps> = ({company}) => {
 
         setIsUploading(false);
 
-        // Сброс инпута, даже если загрузка не удалась
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
         }

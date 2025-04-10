@@ -13,7 +13,6 @@ export class ContactStore {
         makeAutoObservable(this, { rootStore: false });
     }
 
-    // Получение данных контакта
     async fetchContact(id: string): Promise<void> {
         this.isLoading = true;
         this.error = null;
@@ -33,21 +32,18 @@ export class ContactStore {
         }
     }
 
-    // Обновление данных контакта
     async updateContact(id: string, data: IContactUpdateData): Promise<void> {
         if (!this.contact) {
             this.error = 'Нет данных контакта для обновления';
             return;
         }
 
-        // Сначала обновляем данные локально
         this.updateContactLocally(data);
 
         this.isLoading = true;
         this.error = null;
 
         try {
-            // Отправляем данные на сервер
             await contactApi.updateContact(id, data);
 
             runInAction(() => {
@@ -62,12 +58,10 @@ export class ContactStore {
         }
     }
 
-    // Метод для локального обновления данных контакта
     updateContactLocally(data: IContactUpdateData): void {
         if (!this.contact) return;
 
         runInAction(() => {
-            // Обновляем только те поля, которые пришли в data
             if (data.firstname !== undefined) {
                 this.contact!.firstname = data.firstname;
             }
@@ -86,7 +80,6 @@ export class ContactStore {
         });
     }
 
-    // Сброс состояния
     reset(): void {
         this.contact = null;
         this.isLoading = false;

@@ -9,7 +9,6 @@ function useClickOutside<T extends HTMLElement = HTMLElement>(
     useEffect(() => {
         const listener = (event: MouseEvent | TouchEvent) => {
             const el = ref.current;
-            // Не выполняем действие, если клик был внутри элемента или если элемента нет
             if (!el || el.contains(event.target as Node)) {
                 return;
             }

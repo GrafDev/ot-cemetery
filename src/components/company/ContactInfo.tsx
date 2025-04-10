@@ -52,7 +52,6 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ contact }) => {
         }
     };
 
-    // Рендер в режиме просмотра
     if (!isEditing) {
         return (
             <div className="contact-info">
@@ -75,7 +74,6 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ contact }) => {
         );
     }
 
-    // Рендер в режиме редактирования через новый компонент
     return (
         <EditContactInfo
             contact={contact}

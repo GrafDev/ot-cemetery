@@ -1,4 +1,3 @@
-/* Стили для списка компаний */
 .company-list {
     display: flex;
     flex-direction: column;

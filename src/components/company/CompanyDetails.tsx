@@ -1,4 +1,3 @@
-// CompanyDetails.tsx
 import React, { useState } from 'react';
 import { ICompany, ICompanyUpdateData } from '@/api/companyApi';
 import EditButton from '@/components/ui/EditButton';
@@ -14,10 +13,8 @@ interface CompanyDetailsProps {
 const CompanyDetails: React.FC<CompanyDetailsProps> = ({ company }) => {
     const companyStore = useCompanyStore();
 
-    // Состояние для режима редактирования
     const [isEditing, setIsEditing] = useState<boolean>(false);
 
-    // Форматирование даты для отображения
     function formatDateForDisplay(dateString: string) {
         const date = new Date(dateString);
         return date.toLocaleDateString('ru-RU');
@@ -42,7 +39,6 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({ company }) => {
         }
     };
 
-    // Рендер в режиме просмотра
     if (!isEditing) {
         return (
             <div className="company-details">
@@ -65,7 +61,6 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({ company }) => {
         );
     }
 
-    // Рендер в режиме редактирования через новый компонент
     return (
         <EditCompanyDetails
             company={company}

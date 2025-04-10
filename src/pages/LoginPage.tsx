@@ -18,14 +18,13 @@ const LoginPage: React.FC = () => {
         try {
             await authStore.login(data.username);
             companyStore.resetList()
-            navigate('/organizations'); // Меняем на redirect на список компаний
+            navigate('/organizations');
         } catch {
             console.error('Authentication error:', authStore.error || 'Failed to login');
         }
     };
 
     const handleCancel = () => {
-        // Optional cancel logic
     };
 
     return (

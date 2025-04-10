@@ -13,7 +13,6 @@ export class AuthStore {
         this.rootStore = rootStore;
         makeAutoObservable(this, { rootStore: false });
 
-        // Пытаемся восстановить токен из localStorage, если он там есть
         const savedToken = localStorage.getItem('auth_token');
         if (savedToken) {
             this.token = savedToken;
@@ -21,7 +20,6 @@ export class AuthStore {
         }
     }
 
-    // Метод для авторизации
     async login(username: string): Promise<void> {
         this.isLoading = true;
         this.error = null;
@@ -34,10 +32,8 @@ export class AuthStore {
                 this.isLoading = false;
             });
 
-            // Сохраняем токен в localStorage
             localStorage.setItem('auth_token', token);
 
-            // Устанавливаем токен для запросов
             setAuthToken(token);
         } catch (error) {
             runInAction(() => {
@@ -47,16 +43,12 @@ export class AuthStore {
         }
     }
 
-    // Метод для выхода из аккаунта
     logout(): void {
         this.token = null;
-        // Удаляем токен из localStorage
         localStorage.removeItem('auth_token');
-        // Очищаем токен в API
         setAuthToken('');
     }
 
-    // Геттер для проверки, авторизован ли пользователь
     get isAuthenticated(): boolean {
         return !!this.token;
     }

@@ -31,7 +31,6 @@ const CompanyDeleteModal: React.FC<CompanyDeleteModalProps> = ({
     };
 
     const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        // Если клик был прямо на backdrop (а не на его дочерних элементах), закрываем модалку
         if (e.target === e.currentTarget) {
             onClose();
         }

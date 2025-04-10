@@ -1,6 +1,5 @@
 import React from 'react';
 import contractorIcon from '@/assets/images/Contractor.png';
-// Предполагается, что у вас будет добавлен импорт стилей в main.css
 
 const ContractorsPage: React.FC = () => {
     return (

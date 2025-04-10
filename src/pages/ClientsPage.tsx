@@ -1,6 +1,5 @@
 import React from 'react';
 import accountIcon from '@/assets/images/Account.png';
-// Предполагается, что у вас будет добавлен импорт стилей в main.css
 
 const ClientsPage: React.FC = () => {
     return (

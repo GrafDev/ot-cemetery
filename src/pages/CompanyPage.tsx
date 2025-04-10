@@ -15,15 +15,11 @@ const CompanyPage: React.FC = () => {
     useEffect(() => {
         if (id) {
             const fetchData = async () => {
-                // Проверяем, нужно ли загружать данные компании
-                // Загружаем только если компания еще не загружена или это другая компания
                 if (!companyStore.company || companyStore.company.id !== id) {
                     await companyStore.fetchCompany(id);
                 }
 
                 if (companyStore.company?.contactId) {
-                    // Проверяем, нужно ли загружать данные контакта
-                    // Загружаем только если контакт еще не загружен или это другой контакт
                     if (!contactStore.contact || contactStore.contact.id !== companyStore.company.contactId) {
                         await contactStore.fetchContact(companyStore.company.contactId);
                     }
@@ -33,8 +29,6 @@ const CompanyPage: React.FC = () => {
             fetchData();
         }
 
-        // Не сбрасываем данные при размонтировании компонента!
-        // Удаляем функцию очистки, чтобы данные сохранялись при навигации
 
     }, [id, companyStore, contactStore]);
 

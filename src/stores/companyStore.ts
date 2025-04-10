@@ -146,7 +146,6 @@ export class CompanyStore {
         }
     }
 
-    // Загрузка изображения
     async uploadImage(id: string, file: File): Promise<boolean> {
         this.isLoading = true;
         this.error = null;
@@ -155,7 +154,6 @@ export class CompanyStore {
             const photo = await companyApi.uploadImage(id, file);
 
             if (!photo) {
-                // Ошибка уже показана через toast в companyApi
                 runInAction(() => {
                     this.isLoading = false;
                 });
@@ -179,7 +177,6 @@ export class CompanyStore {
         }
     }
 
-    // Удаление изображения
     async deleteImage(companyId: string, imageName: string): Promise<void> {
         this.isLoading = true;
         this.error = null;
@@ -201,7 +198,6 @@ export class CompanyStore {
         }
     }
 
-    // Получение списка компаний
     async fetchCompanies(): Promise<void> {
         this.isLoadingList = true;
         this.listError = null;
@@ -221,14 +217,12 @@ export class CompanyStore {
         }
     }
 
-    // Сброс состояния списка компаний
     resetList(): void {
         this.companies = [];
         this.isLoadingList = false;
         this.listError = null;
     }
 
-    // Сброс состояния
     reset(): void {
         this.company = null;
         this.isLoading = false;

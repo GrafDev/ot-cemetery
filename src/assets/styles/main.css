@@ -1,10 +1,8 @@
-/* src/styles/main.css */
 @import './reset.css';
 @import './variables.css';
 @import './base.css';
 
 
-/* Компоненты */
 @import './components/layout.css';
 @import './components/company.css';
 @import './components/modals.css';

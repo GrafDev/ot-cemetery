@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Импортируем иконки из вашей папки assets
 import companyIcon from '@/assets/images/Company.png';
 import contractorIcon from '@/assets/images/Contractor.png';
 import accountIcon from '@/assets/images/Account.png';

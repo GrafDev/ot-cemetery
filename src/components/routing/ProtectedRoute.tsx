@@ -11,7 +11,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     const authStore = useAuthStore();
 
     if (!authStore.isAuthenticated) {
-        // Перенаправляем на страницу логина, если пользователь не авторизован
         return <Navigate to="/login" replace />;
     }
 

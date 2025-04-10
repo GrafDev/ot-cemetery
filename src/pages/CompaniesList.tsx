@@ -11,15 +11,12 @@ const CompaniesList: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Загружаем список компаний только если он еще не загружен
         if (companyStore.companies.length === 0) {
             const fetchData = async () => {
                 await companyStore.fetchCompanies();
             };
             fetchData();
         } else {
-            // Если у нас уже есть текущая компания в store,
-            // и она есть в списке, обновляем её данные в списке
             if (companyStore.company) {
                 const companyIndex = companyStore.companies.findIndex(
                     c => c.id === companyStore.company?.id
@@ -32,7 +29,6 @@ const CompaniesList: React.FC = () => {
         }
     }, [companyStore]);
 
-    // Обработчик для перехода к детальной странице компании
     const handleCompanyClick = (id: string) => {
         navigate(`/company/${id}`);
     };

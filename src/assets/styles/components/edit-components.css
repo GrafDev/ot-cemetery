@@ -47,12 +47,10 @@
     font-size: 1rem;
 }
 
-/* Режим редактирования */
 .company-details--editing {
     padding-bottom: 2rem;
 }
 
-/* Форма */
 .company-details__form {
     width: 100%;
     margin-top: 1.5rem;
@@ -88,7 +86,6 @@
     font-weight: 400;
 }
 
-/* Поля ввода */
 .input {
     width: 100%;
     padding: 0.75rem 1rem;
@@ -110,7 +107,6 @@
     box-shadow: 0 0 0 1px var(--assistitive-color);
 }
 
-/* Dropdown - обновленные стили для обоих селектов */
 .dropdown-select {
     position: relative;
     width: 100%;
@@ -127,13 +123,12 @@
     background-color: #ffffff;
     color: #3B3B3B;
     cursor: pointer;
-    /* ИСПРАВЛЕНИЕ: Удаляем фоновое изображение */
     background-image: none !important;
 }
 
 .dropdown-select__arrow {
-    width: 28px; /* Увеличено в 2 раза с 14px */
-    height: 28px; /* Увеличено в 2 раза с 14px */
+    width: 28px;
+    height: 28px;
     margin-left: auto;
     margin-right: 0.5rem;
     transition: transform 0.2s ease;
@@ -149,11 +144,9 @@
     margin-left: auto;
     margin-right: 0.5rem;
     transition: transform 0.2s ease;
-    /* Устанавливаем постоянный цвет, который не будет меняться */
     filter: brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(110deg) brightness(95%) contrast(83%) !important;
 }
 
-/* ИСПРАВЛЕНИЕ: Добавляем анимацию вращения для стрелки */
 .dropdown-select.open .dropdown-select__arrow {
     transform: rotate(180deg);
 }
@@ -172,7 +165,6 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Стили для обычных опций (первый селект) */
 .dropdown-select__option {
     padding: 1rem;
     cursor: pointer;
@@ -194,7 +186,6 @@
     color: var(--primary20-color);
 }
 
-/* Чекбоксы внутри dropdown (второй селект) */
 .dropdown-select__options--checkbox {
     padding: 0;
 }
@@ -221,13 +212,12 @@
     background-color: var(--primary95-color);
 }
 
-/* ИСПРАВЛЕНИЕ: Обновленные стили для чекбоксов */
 .dropdown-select__checkbox {
     margin-right: 0.75rem;
     width: 20px;
     height: 20px;
     appearance: none;
-    border: 2px solid #E2E8F0; /* Более нейтральный цвет границы */
+    border: 2px solid var(--primary-color);
     border-radius: 4px;
     cursor: pointer;
     position: relative;
@@ -235,18 +225,18 @@
 
 .dropdown-select__checkbox:checked {
     background-color: white;
-    border-color: #4A5568; /* Более темный нейтральный цвет для выделенного состояния */
+    border-color: var(--primary-color);
 }
 
 .dropdown-select__checkbox:checked::after {
     content: '';
     position: absolute;
-    top: 45%; /* Сместили немного ниже */
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(45deg);
-    width: 6px; /* Увеличили ширину галочки */
-    height: 12px; /* Увеличили высоту галочки */
-    border: solid #3B3B3B; /* Темно-серый цвет для галочки, соответствующий дизайну */
+    width: 6px;
+    height: 12px;
+    border: solid #3B3B3B;
     border-width: 0 2px 2px 0;
 }
 
@@ -256,7 +246,6 @@
     color: var(--primary-color);
 }
 
-/* Кнопки */
 .company-details__actions {
     display: flex;
     gap: 0.75rem;

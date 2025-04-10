@@ -1,4 +1,3 @@
-// src/stores/rootStore.ts
 import { AuthStore } from './authStore';
 import { CompanyStore } from './companyStore';
 import { ContactStore } from './contactStore';
@@ -15,5 +14,4 @@ export class RootStore {
     }
 }
 
-// Создаем глобальный инстанс RootStore
 export const rootStore = new RootStore();

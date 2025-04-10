@@ -39,7 +39,6 @@ export interface ICompanyUpdateData {
 }
 
 export const companyApi = {
-    // Получение данных компании
     getCompany: async (id: string): Promise<ICompany> => {
         const response = await fetch(`https://test-task-api.allfuneral.com/companies/${id}`, {
             method: 'GET',
@@ -56,7 +55,6 @@ export const companyApi = {
         return await response.json();
     },
 
-    // Обновление данных компании
     updateCompany: async (id: string, data: ICompanyUpdateData): Promise<ICompany> => {
         const response = await fetch(`https://test-task-api.allfuneral.com/companies/${id}`, {
             method: 'PATCH',
@@ -74,7 +72,6 @@ export const companyApi = {
         return await response.json();
     },
 
-    // Удаление компании
     deleteCompany: async (id: string): Promise<void> => {
         const response = await fetch(`https://test-task-api.allfuneral.com/companies/${id}`, {
             method: 'DELETE',
@@ -88,7 +85,6 @@ export const companyApi = {
         }
     },
 
-    // Загрузка изображения
     uploadImage: async (id: string, file: File): Promise<ICompanyPhoto | null> => {
         const formData = new FormData();
         formData.append('file', file);
@@ -121,7 +117,6 @@ export const companyApi = {
 
 
 
-    // Удаление изображения
     deleteImage: async (companyId: string, imageName: string): Promise<void> => {
         try {
             const response = await fetch(`${API_URL}/companies/${companyId}/image/${imageName}`, {
@@ -129,7 +124,6 @@ export const companyApi = {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
                 },
-                // Добавляем настройки CORS
                 mode: 'cors',
                 credentials: 'same-origin'
             });
@@ -139,7 +133,6 @@ export const companyApi = {
             }
         } catch (error) {
             console.error('Ошибка удаления изображения:', error);
-            // Переформатируем ошибку для лучшего отображения пользователю
             if (error instanceof Error) {
                 throw error;
             } else {
@@ -148,9 +141,7 @@ export const companyApi = {
         }
     },
 
-    // Получение списка компаний
     getCompanies: async (): Promise<ICompany[]> => {
-        // Пока будем получать только одну компанию с id=12
         const response = await fetch(`https://test-task-api.allfuneral.com/companies/12`, {
             method: 'GET',
             headers: {
@@ -164,7 +155,6 @@ export const companyApi = {
         }
 
         const company = await response.json();
-        // Возвращаем массив из одной компании
         return [company];
     }
 };

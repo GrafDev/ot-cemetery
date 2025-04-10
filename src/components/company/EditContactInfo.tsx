@@ -1,4 +1,3 @@
-// EditContactInfo.tsx
 import React, { useState, useEffect } from 'react';
 import { IContact, IContactUpdateData } from '@/api/contactApi';
 import checkIcon from '@/assets/images/Check.png';
@@ -11,16 +10,13 @@ interface EditContactInfoProps {
 }
 
 const EditContactInfo: React.FC<EditContactInfoProps> = ({ contact, onSave, onCancel }) => {
-    // Состояния для полей формы
     const [firstname, setFirstname] = useState<string>(contact.firstname);
     const [lastname, setLastname] = useState<string>(contact.lastname);
     const [phone, setPhone] = useState<string>(contact.phone);
     const [email, setEmail] = useState<string>(contact.email);
 
-    // Состояние загрузки
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    // Обновляем состояния при изменении свойства contact
     useEffect(() => {
         setFirstname(contact.firstname);
         setLastname(contact.lastname);

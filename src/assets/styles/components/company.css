@@ -272,33 +272,37 @@
     width: 100%;
 }
 
-/* Стили для кнопки назад */
 .back-button {
     position: absolute;
     left: -40px;
     top: 50%;
     transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
+    width: 40px; /* увеличено для круглого фона */
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease;
     background: transparent;
+    border-radius: 50%; /* круглая форма */
 }
 
 .back-button__icon {
     width: 24px;
     height: 24px;
-    /* Темный цвет для иконки, как в стилях кнопок */
-    filter: brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(110deg) brightness(95%) contrast(83%);
     transition: filter 0.2s ease;
+    filter: brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(110deg) brightness(95%) contrast(83%);
 }
 
-.back-button:hover .back-button__icon {
-    /* Цвет при наведении (фиолетовый) */
-    filter: brightness(0) saturate(100%) invert(31%) sepia(54%) saturate(6932%) hue-rotate(241deg) brightness(98%) contrast(101%);
+/* Наведение */
+.back-button:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* светло-серый фон */
+}
+
+/* Активное состояние (клик) */
+.back-button:active {
+    background-color: rgba(138, 43, 226, 0.1); /* светло-фиолетовый фон */
 }
 
 /* Обновленные стили для кнопок в шапке */

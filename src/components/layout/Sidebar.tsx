@@ -10,7 +10,7 @@ import settingsButton from '@/assets/images/Settings.png';
 interface SidebarProps {
     activeDrawer: string | null;
     toggleDrawer: (drawerId: string) => void;
-    closeDrawer: () => void; // Добавляем функцию закрытия drawer
+    closeDrawer: () => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({activeDrawer, toggleDrawer, closeDrawer}) => {
@@ -18,7 +18,7 @@ const Sidebar: React.FC<SidebarProps> = ({activeDrawer, toggleDrawer, closeDrawe
     const authStore = useAuthStore();
 
     const handleLogout = () => {
-        closeDrawer(); // Закрываем drawer перед выходом
+        closeDrawer();
         authStore.logout();
         navigate('/login');
     };

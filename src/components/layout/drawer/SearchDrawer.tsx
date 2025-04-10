@@ -10,7 +10,6 @@ const SearchDrawer: React.FC<SearchDrawerProps> = () => {
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        // Здесь будет логика поиска
         console.log('Search query:', searchQuery);
     };
 
